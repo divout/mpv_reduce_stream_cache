@@ -8,28 +8,28 @@ var options = {
 }
 mp.options.read_options(options, "stream_cache_reduce")
 
-var changeSpeed = function(name, current_cache_seconds) {
+var decide_to_change_speed = function(name, current_cache_seconds) {
   var speed = mp.get_property_native('speed');
   if (current_cache_seconds >= options['enable_faster_speed_over_cache_seconds'] && speed === 1) {
-    setSpeed(options['faster_speed'])
+    set_speed(options['faster_speed'])
   } else if (current_cache_seconds <= options['disable_faster_speed_under_cache_seconds'] && speed > 1) {
-    setSpeed(1)
+    set_speed(1)
   }
 }
 
-var setSpeed = function(speed) {
+var set_speed = function(speed) {
   mp.set_property('speed', speed)
   mp.osd_message('speed ' + speed)
 }
 
 var observe_cache = function() {
-  mp.observe_property('demuxer-cache-duration', 'number', changeSpeed)
+  mp.observe_property('demuxer-cache-duration', 'number', decide_to_change_speed)
   mp.osd_message('observing cache')
 }
 
 var unobserve_cache = function() {
-  mp.unobserve_property(changeSpeed)
-  setSpeed(1)
+  mp.unobserve_property(decide_to_change_speed)
+  set_speed(1)
   mp.osd_message('not observing cache')
 }
 
