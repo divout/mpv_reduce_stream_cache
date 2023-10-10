@@ -35,7 +35,8 @@ sigmoid-upscaling=no
 ```bash
 streamlink twitch.tv/twitch \
   best \
-  -p "mpv --profile='stream' --script-opts='enable-stream-cache-reduction=true'" \
+  -p "mpv" \
+  --player-args="--profile='stream' --script-opts='enable-stream-cache-reduction=true'" \
   --title="stream-twitch" \
   --twitch-low-latency \
   --twitch-disable-ads \
@@ -51,7 +52,8 @@ If you use the MPV profile that disables cache, you won't be able to seek the vi
 ```bash
 streamlink twitch.tv/twitch \
   best \
-  -p "mpv --profile='stream' --script-opts='enable-stream-cache-reduction=true'" \
+  -p "mpv" \
+  --player-args="--profile='stream' --script-opts='enable-stream-cache-reduction=true'" \
   --title="stream-twitch" \
   --twitch-low-latency \
   --twitch-disable-ads \
