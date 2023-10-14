@@ -6,7 +6,7 @@ var options = {
   faster_speed: 1.015,
   toggle_stream_cache_reduction_shortcut: 'a'
 }
-mp.options.read_options(options, "stream_cache_reduce")
+mp.options.read_options(options, "reduce_stream_cache")
 
 var decide_to_change_speed = function(name, current_cache_seconds) {
   var speed = mp.get_property_native('speed');
