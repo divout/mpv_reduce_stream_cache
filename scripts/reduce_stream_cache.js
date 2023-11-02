@@ -3,7 +3,8 @@
 var options = {
   enable_faster_speed_over_cache_seconds: 0.6,
   disable_faster_speed_under_cache_seconds: 0.3,
-  faster_speed: 1.015,
+  faster_speed: 1.05,
+  slower_speed: 0.9,
   toggle_stream_cache_reduction_shortcut: 'a'
 }
 mp.options.read_options(options, "reduce_stream_cache")
@@ -13,6 +14,10 @@ var decide_to_change_speed = function(name, current_cache_seconds) {
   if (current_cache_seconds >= options['enable_faster_speed_over_cache_seconds'] && speed === 1) {
     set_speed(options['faster_speed'])
   } else if (current_cache_seconds <= options['disable_faster_speed_under_cache_seconds'] && speed > 1) {
+    set_speed(1)
+  } else if (current_cache_seconds <= options['disable_faster_speed_under_cache_seconds'] && speed === 1) {
+    set_speed(options['slower_speed'])
+  } else if (current_cache_seconds >= options['disable_faster_speed_under_cache_seconds'] && speed < 1) {
     set_speed(1)
   }
 }
